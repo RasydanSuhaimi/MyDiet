@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MyDiet.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MyDiet.Pages"
+    Shell.FlyoutBehavior="Disabled"
+    Title="MyDiet"
+    Shell.BackgroundColor="#342D7E" 
+    Shell.TitleColor="White">
+
+    <!--<TabBar>
+        <Tab Title="Calculator" Icon="menu.png">
+            <ShellContent ContentTemplate="{DataTemplate local:CalorieCalculator}" Route="CalorieCalculator" />
+        </Tab>
+        <Tab Title="Log Food" Icon="menu.png">
+            <ShellContent ContentTemplate="{DataTemplate local:logFood}" Route="logFood" />
+        </Tab>
+
+        <Tab Title="Record" Icon="menu.png">
+            <ShellContent ContentTemplate="{DataTemplate local:Record}" Route="Record" />
+        </Tab>
+        --><!-- Add more tabs as needed --><!--
+    </TabBar>-->
+
+    <FlyoutItem Title="Home" FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+        Title="Calculator"
+        ContentTemplate="{DataTemplate local:CalorieCalculator}"
+        Route="CalorieCalculator" />
+        <ShellContent
+        Title="Log Food"
+        ContentTemplate="{DataTemplate local:logFood}"
+        Route="Log Food" />
+        <ShellContent
+        Title="Record"
+        ContentTemplate="{DataTemplate local:Record}"
+        Route="Record" />
+    </FlyoutItem>
+
+</Shell>

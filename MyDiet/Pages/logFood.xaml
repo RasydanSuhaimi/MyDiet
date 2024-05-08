@@ -1,0 +1,97 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyDiet.Pages.logFood"
+             Title="Log Food">
+
+    <CollectionView x:Name="displayRecord" ItemsSource="{Binding TotalCalorie}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <VerticalStackLayout Padding="20,0" Spacing="15">
+                    <Frame CornerRadius="5" BackgroundColor="#FFFFFF" HeightRequest="100" Margin="0,20,0,0" >
+                        <Grid ColumnDefinitions="20*, 10*, 20* ,10* ,20*">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Grid.Row="0" Text="{Binding TotalCalorie}" FontAttributes="Bold" Padding="5"/>
+                            <Label Grid.Column="1" Grid.Row="0" Text="-" FontAttributes="Bold" Padding="5"/>
+                            <Label Grid.Column="2" Grid.Row="0" Text="{Binding Food}" FontAttributes="Bold" Padding="5"/>
+                            <Label Grid.Column="3" Grid.Row="0" Text="=" FontAttributes="Bold" Padding="5"/>
+                            <Label Grid.Column="4" Grid.Row="0" Text="{Binding Remaining}" FontAttributes="Bold" Padding="5"/>
+
+                            <!-- Second row -->
+                            <Label Grid.Column="0" Grid.Row="1" Text="Goal" FontAttributes="Bold" Padding="5"/>
+                            <Label Grid.Column="2" Grid.Row="1" Text="Food" FontAttributes="Bold" Padding="5"/>
+                            <Label Grid.Column="4" Grid.Row="1" Text="Remaining" FontAttributes="Bold" Padding="5"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame CornerRadius="5" BackgroundColor="#FFFFFF"  Margin="0,30,0,0" Padding="{OnPlatform Android='10,5'}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Breakfast" FontAttributes="Bold" Padding="5" FontSize="16"  VerticalOptions="Center"/>
+
+                            <!-- Second row -->
+                            <Button x:Name="addBreakfastButton" Text="Add" VerticalOptions="CenterAndExpand" HeightRequest="40" WidthRequest="80" Grid.Column="0" Grid.Row="1"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame CornerRadius="5" BackgroundColor="#FFFFFF" Padding="{OnPlatform Android='10,5'}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Lunch" FontAttributes="Bold" Padding="5" FontSize="16"  VerticalOptions="Center"/>
+
+                            <!-- Second row -->
+                            <Button x:Name="addLunchButton" Text="Add" VerticalOptions="CenterAndExpand" HeightRequest="40" WidthRequest="80" Grid.Column="0" Grid.Row="1"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame CornerRadius="5" BackgroundColor="#FFFFFF" Padding="{OnPlatform Android='10,5'}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Dinner" FontAttributes="Bold" Padding="5" FontSize="16" VerticalOptions="Center"/>
+
+                            <!-- Second row -->
+                            <Button x:Name="addDinnerButton" Text="Add" VerticalOptions="CenterAndExpand" HeightRequest="40" WidthRequest="80" Grid.Column="0" Grid.Row="1"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame CornerRadius="5" BackgroundColor="#FFFFFF" Padding="{OnPlatform Android='10,5'}" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Snack" FontAttributes="Bold" Padding="5" FontSize="16" VerticalOptions="Center"/>
+
+                            <!-- Second row -->
+                            <Button x:Name="addSnackButton" Text="Add" VerticalOptions="CenterAndExpand" HeightRequest="40" WidthRequest="80" Grid.Column="0" Grid.Row="1" Clicked="AddSnackButton_Clicked"/>
+                        </Grid>
+                    </Frame>
+
+                </VerticalStackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyDiet.Pages.CalorieCalculator"
+             Title="Calorie Calculator">
+    <ScrollView>
+        <VerticalStackLayout Padding="30,0" Spacing="15" >
+
+            <Frame CornerRadius="5" BackgroundColor="#FFFFFF" HeightRequest="70" Margin="0,20,0,0" >
+                <StackLayout>
+                    <Entry x:Name="inputWeight" Placeholder="Enter weight in kg" Keyboard="Numeric"
+                           TextColor="#333333" FontSize="16" HeightRequest="40"/>
+                </StackLayout>
+            </Frame>
+            <Frame CornerRadius="5" BackgroundColor="#FFFFFF" HeightRequest="70">
+                <StackLayout>
+                    <Entry x:Name="inputHeight" Placeholder="Enter Height in cm" Keyboard="Numeric"
+                           TextColor="#333333" FontSize="16" HeightRequest="40"/>
+                </StackLayout>
+            </Frame>
+            <Frame CornerRadius="5" BackgroundColor="#FFFFFF" HeightRequest="70">
+                <StackLayout>
+                    <Entry x:Name="inputAge" Placeholder="Enter age" Keyboard="Numeric"
+                           TextColor="#333333" FontSize="16" HeightRequest="40"/>
+                </StackLayout>
+            </Frame>
+            <Frame CornerRadius="5" BackgroundColor="#FFFFFF" HeightRequest="70">
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center" Margin="20">
+                    <Label Text="Gender" VerticalOptions="Center" FontAttributes="Bold" FontSize="16" />
+                    <RadioButton x:Name="radioMale" Content="Male" GroupName="Gender" VerticalOptions="Center" FontSize="16" Margin="10,0,0,0" />
+                    <RadioButton x:Name="radioFemale" Content="Female" GroupName="Gender" VerticalOptions="Center" FontSize="16" Margin="10,0,0,0" />
+                </StackLayout>
+            </Frame>
+
+            <FlexLayout Direction="Row" AlignItems="Center" JustifyContent="SpaceEvenly">
+                <Button x:Name="calculateButton" Text="Calculate" VerticalOptions="CenterAndExpand" HeightRequest="60" WidthRequest="110" Margin="30" Clicked="OnCalculateCalorie"/>
+            </FlexLayout>
+
+
+            <Label x:Name="outputResult" HorizontalTextAlignment="Center" />
+            <Frame CornerRadius="5" BackgroundColor="#FFFFFF" HeightRequest="100">
+                <StackLayout>
+                    <Label Text="Your remainig calorie is" HorizontalTextAlignment="Center" />
+                    <ProgressBar ProgressColor="lightgreen" HeightRequest="40" WidthRequest="300" ScaleY="4" ScaleX="1"
+                     Progress="{Binding Progress, Mode=OneWay}" />
+                </StackLayout>
+            </Frame>
+
+            <FlexLayout Direction="Row" AlignItems="Center" JustifyContent="SpaceEvenly" HeightRequest="40">
+                <ImageButton Source="calendaricon.png" WidthRequest="50" HeightRequest="50" IsVisible="true" HorizontalOptions="End" />
+                <DatePicker x:Name="selectDate" DateSelected="onDatePickerSelected" WidthRequest="85" HeightRequest="50" Format="dd/MM/yyyy" HorizontalOptions="Start" />
+            </FlexLayout>
+
+            <StackLayout HorizontalOptions="FillAndExpand">
+                <Button x:Name="saveButton" Text="Save" VerticalOptions="CenterAndExpand" Clicked="OnSaveRecord"/>
+            </StackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

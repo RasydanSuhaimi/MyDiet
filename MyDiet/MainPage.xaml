@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyDiet.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30,0" Spacing="15" >
+
+            <Frame CornerRadius="5" BackgroundColor="#FFFFFF" HeightRequest="70" Margin="0,20,0,0">
+                <StackLayout>
+                    <Entry x:Name="inputWeight" Placeholder="Enter weight in kg" Keyboard="Numeric"
+                               TextColor="#333333" FontSize="16" HeightRequest="40"/>
+                </StackLayout>
+            </Frame>
+            <Frame CornerRadius="5" BackgroundColor="#FFFFFF" HeightRequest="70">
+                <StackLayout>
+                    <Entry x:Name="inputHeight" Placeholder="Enter Height in cm" Keyboard="Numeric"
+                               TextColor="#333333" FontSize="16" HeightRequest="40"/>
+                </StackLayout>
+            </Frame>
+            <Frame CornerRadius="5" BackgroundColor="#FFFFFF" HeightRequest="70">
+                <StackLayout>
+                    <Entry x:Name="inputAge" Placeholder="Enter age" Keyboard="Numeric"
+                               TextColor="#333333" FontSize="16" HeightRequest="40"/>
+                </StackLayout>
+            </Frame>
+            <Frame CornerRadius="5" BackgroundColor="#FFFFFF" HeightRequest="70">
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center" Margin="20">
+                    <Label Text="Gender" VerticalOptions="Center" FontAttributes="Bold" FontSize="16" />
+                    <RadioButton x:Name="radioMale" Content="Male" GroupName="Gender" VerticalOptions="Center" FontSize="16" Margin="10,0,0,0" />
+                    <RadioButton x:Name="radioFemale" Content="Female" GroupName="Gender" VerticalOptions="Center" FontSize="16" Margin="10,0,0,0" />
+                </StackLayout>
+            </Frame>
+
+            <FlexLayout Direction="Row" AlignItems="Center" JustifyContent="SpaceEvenly">
+                <Button x:Name="calculateButton" Text="Calculate" VerticalOptions="CenterAndExpand" HeightRequest="60" WidthRequest="110" Margin="30" Clicked="OnCalculateCalorie"/>
+            </FlexLayout>
+
+            <Label x:Name="outputResult" Text="0.00" HorizontalTextAlignment="Center" />
+            
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
