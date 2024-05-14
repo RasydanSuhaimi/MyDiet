@@ -11,6 +11,6 @@ namespace MyDiet
         public int CalorieCount { get; set; }
         public string Food { get; set; }
         public string Meal { get; set; }
-        public DateTime DateRecorded { get; set; }
+        public string DateRecorded { get; set; }
     }
 }

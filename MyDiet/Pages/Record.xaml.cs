@@ -31,6 +31,22 @@ public partial class Record : ContentPage
         }
     }
 
+    async void onDatePickerSelected(object sender, DateChangedEventArgs e)
+    {
+        try
+        {
+            var selectedDate = e.NewDate.ToString("dd/MM/yyyy");
+            displayRecord.ItemsSource = await firebaseHelper.GetSelectedFoodRecord(selectedDate);
+
+        }
+        catch (Exception ex)
+        {
+            // Handle the exception (e.g., log it, show an error message)
+            Console.WriteLine($"Error in onDatePickerSelected: {ex.Message}");
+        }
+    }
+
+
 
 
 

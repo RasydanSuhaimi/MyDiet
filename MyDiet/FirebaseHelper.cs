@@ -31,14 +31,14 @@ namespace MyDiet
             return record?.Object;
         }
 
-        public async Task SaveFood(string f, int c, string meal, DateTime dt )
+        public async Task SaveFood(string f, int c, string meal, string dt )
         {
             await firebase
                 .Child("SaveFood")
                 .PostAsync(new SaveFood() { Food = f, CalorieCount = c, Meal = meal, DateRecorded = dt});
         }
 
-        public async Task<List<SaveFood>> GetAllFoodRecord(string foodType = null, DateTime? currentDate = null)
+        public async Task<List<SaveFood>> GetAllFoodRecord(string foodType = null, string dateString = null)
         {
             var allRecords = (await firebase
                 .Child("SaveFood")
@@ -48,22 +48,22 @@ namespace MyDiet
                     Food = item.Object.Food,
                     CalorieCount = item.Object.CalorieCount,
                     Meal = item.Object.Meal,
-                    DateRecorded = Convert.ToDateTime(item.Object.DateRecorded), // Convert to DateTime
-                });
+                    DateRecorded = item.Object.DateRecorded
+                }).ToList();
 
             if (!string.IsNullOrEmpty(foodType))
             {
                 // Filter records based on foodType
-                allRecords = allRecords.Where(record => record.Meal.ToLower() == foodType.ToLower());
+                allRecords = allRecords.Where(record => record.Meal.ToLower() == foodType.ToLower()).ToList();
             }
 
-            if (currentDate.HasValue)
+            if (!string.IsNullOrEmpty(dateString))
             {
-                // Filter records based on currentDate
-                allRecords = allRecords.Where(record => record.DateRecorded.Date == currentDate.Value.Date);
+                // Filter records based on dateString
+                allRecords = allRecords.Where(record => DateTime.ParseExact(record.DateRecorded, "dd/MM/yyyy", null).Date == DateTime.ParseExact(dateString, "dd/MM/yyyy", null).Date).ToList();
             }
 
-            return allRecords.ToList();
+            return allRecords;
         }
 
 
@@ -88,17 +88,33 @@ namespace MyDiet
 
             // Filter and sum the calorie count for the current date
             int sumCalorieCount = foodItems
-                .Where(item => item.Object.DateRecorded.Date == currentDate.Date)
+                .Where(item => DateTime.ParseExact(item.Object.DateRecorded, "dd/MM/yyyy", null).Date == currentDate)
                 .Sum(item => item.Object.CalorieCount);
 
             return sumCalorieCount;
         }
+
 
         public async Task DeleteFoodRecord()
         {
             await firebase
                 .Child("SaveFood")
                 .DeleteAsync();
+        }
+
+        public async Task<List<SaveFood>> GetSelectedFoodRecord(string dateRecorded)
+        {
+            return (await firebase
+            .Child("SaveFood")
+            .OnceAsync<SaveFood>()).Select(item => new SaveFood
+            {
+                Food = item.Object.Food,
+                CalorieCount = item.Object.CalorieCount,
+                Meal = item.Object.Meal,
+                DateRecorded = item.Object.DateRecorded
+            })
+            .Where(record => record.DateRecorded == dateRecorded)
+         .ToList();
         }
     }
 }

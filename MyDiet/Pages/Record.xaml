@@ -2,10 +2,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyDiet.Pages.Record"
              BackgroundColor="#F4F5FC"
-             Title="Record">
+             Title="Record">    
     <ScrollView>
         <StackLayout>
-            <Frame BorderColor="Gray" CornerRadius="10" Padding="15" Margin="15, 30, 15, 20" >
+
+            <FlexLayout Direction="RowReverse" AlignItems="Center" JustifyContent="SpaceBetween" HeightRequest="50" Margin="0, 20, 15, 0">
+                <Frame BorderColor="white" CornerRadius="5" HasShadow="true" Padding="0" WidthRequest="115" HeightRequest="45">
+                    <DatePicker DateSelected="onDatePickerSelected" Format="dd MMMM yyyy" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Frame>
+            </FlexLayout>
+
+            <Frame BorderColor="Gray" CornerRadius="10" Padding="15" Margin="15, 10, 15, 20" >
                 <CollectionView x:Name="displayRecord" ItemsSource="{Binding CalorieCount}">
                     <CollectionView.Header>
                         <Grid ColumnDefinitions="1.5* , 1*, 1.2*, 1.5*" BackgroundColor="#766EBB">

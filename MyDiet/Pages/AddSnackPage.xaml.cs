@@ -25,6 +25,8 @@ namespace MyDiet.Pages
         async void SaveRecord(object sender, EventArgs e)
         {
             DateTime currentDate = DateTime.Now;
+            string formattedDate = currentDate.ToString("dd/MM/yyyy");
+
 
             if (string.IsNullOrWhiteSpace(Food.Text))
             {
@@ -44,7 +46,7 @@ namespace MyDiet.Pages
                 return;
             }
 
-            await firebaseHelper.SaveFood(Food.Text, calorie, "Snack", currentDate);
+            await firebaseHelper.SaveFood(Food.Text, calorie, "Snack", formattedDate);
 
             await DisplayAlert("Record Saved", "Record has been saved", "OK");
 

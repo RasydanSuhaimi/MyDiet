@@ -1,6 +1,7 @@
 using Syncfusion.Maui.Core.Carousel;
 using Microsoft.Maui.Controls;
 
+
 namespace MyDiet.Pages
 {
     public partial class logFood : ContentPage
@@ -12,11 +13,12 @@ namespace MyDiet.Pages
         {
             base.OnAppearing();
             DateTime currentDate = DateTime.Today;
-            displaysnack.ItemsSource = await firebaseHelper.GetAllFoodRecord("Snack", currentDate);
-            displaybreakfast.ItemsSource = await firebaseHelper.GetAllFoodRecord("Breakfast", currentDate);
-            displaylunch.ItemsSource = await firebaseHelper.GetAllFoodRecord("Lunch", currentDate);
-            displaydinner.ItemsSource = await firebaseHelper.GetAllFoodRecord("Dinner", currentDate);
+            string formattedDate = currentDate.ToString("dd/MM/yyyy");
 
+            displaysnack.ItemsSource = await firebaseHelper.GetAllFoodRecord("Snack", formattedDate);
+            displaybreakfast.ItemsSource = await firebaseHelper.GetAllFoodRecord("Breakfast", formattedDate);
+            displaylunch.ItemsSource = await firebaseHelper.GetAllFoodRecord("Lunch", formattedDate);
+            displaydinner.ItemsSource = await firebaseHelper.GetAllFoodRecord("Dinner", formattedDate);
 
             var calorie = await firebaseHelper.GetTotalCalorieCountForCurrentDate();
             calorieConsume.Text = calorie.ToString();
@@ -24,14 +26,24 @@ namespace MyDiet.Pages
             var latestRecord = await firebaseHelper.GetLatestCalorieRecord();
             if (latestRecord != null)
             {
-                // Assuming displayCalorieNeed is a Label
                 double remainingCalories = latestRecord.TotalCalorie - calorie;
 
                 displayCalorieNeed.Text = $"{latestRecord.TotalCalorie}";
-
                 displayRemaining.Text = $"{remainingCalories.ToString()}";
-            }
 
+                // Change the text color based on the value of remainingCalories
+                if (remainingCalories < 0)
+                {
+                    displayRemaining.TextColor = Colors.Red;
+                    warningLabel.Text = "You have exceeded your calorie goal!";
+                    warningLabel.IsVisible = true;
+                }
+                else
+                {
+                    displayRemaining.TextColor = Colors.Black; // or another color of your choice
+                    warningLabel.IsVisible = false;
+                }
+            }
         }
 
         public logFood()

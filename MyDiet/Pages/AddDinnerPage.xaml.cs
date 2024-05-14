@@ -18,6 +18,8 @@ public partial class AddDinnerPage : ContentPage
     async void SaveRecord(object sender, EventArgs e)
     {
         DateTime currentDate = DateTime.Now;
+        string formattedDate = currentDate.ToString("dd/MM/yyyy");
+
 
         if (string.IsNullOrWhiteSpace(Food.Text))
         {
@@ -37,7 +39,7 @@ public partial class AddDinnerPage : ContentPage
             return;
         }
 
-        await firebaseHelper.SaveFood(Food.Text, calorie, "Dinner", currentDate);
+        await firebaseHelper.SaveFood(Food.Text, calorie, "Dinner", formattedDate);
 
         await DisplayAlert("Record Saved", "Record has been saved", "OK");
 
