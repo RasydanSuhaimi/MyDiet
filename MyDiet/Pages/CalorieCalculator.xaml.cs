@@ -113,5 +113,12 @@ namespace MyDiet.Pages
             //inputWorkout.SelectedItem = null;
             //inputCounter.Text = null;
         }
+
+        void OnReset(object sender, EventArgs e) 
+        {
+            inputWeight.Text = null;
+            inputHeight.Text = null;
+            inputAge.Text = null;
+        }
     }
 }

@@ -35,8 +35,9 @@
 
             <FlexLayout Direction="Row" AlignItems="Center" JustifyContent="SpaceEvenly">
                 <Button x:Name="calculateButton" Text="Calculate" BackgroundColor="#7266DC" VerticalOptions="CenterAndExpand" HeightRequest="60" WidthRequest="110" Margin="30" Clicked="OnCalculateCalorie"/>
+                <Button x:Name="resetButton" Text="Reset" BackgroundColor="#ED5252" VerticalOptions="CenterAndExpand" HeightRequest="60" WidthRequest="110" Margin="30" Clicked="OnReset"/>
             </FlexLayout>
-
+          
 
             <Label x:Name="outputResult" HorizontalTextAlignment="Center" />
             <!--<Frame CornerRadius="5" BackgroundColor="#FFFFFF" HeightRequest="100">
