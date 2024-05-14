@@ -27,6 +27,7 @@ namespace MyDiet.Pages
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+
         public CalorieCalculator()
         {
             InitializeComponent();
@@ -79,13 +80,21 @@ namespace MyDiet.Pages
             }
         }
 
-        void onDatePickerSelected(object sender, DateChangedEventArgs e) 
-        { 
-            var selectedDate = e.NewDate.ToString(); 
-        }
+        //void onDatePickerSelected(object sender, DateChangedEventArgs e) 
+        //{ 
+        //    var selectedDate = e.NewDate.ToString(); 
+        //}
 
         async void OnSaveRecord(object sender, EventArgs e)
         {
+            DateTime selectDate = DateTime.Now;
+
+            // Check if the formattedText is null or empty
+            if (outputResult.FormattedText == null || string.IsNullOrWhiteSpace(outputResult.FormattedText.ToString()))
+            {
+                await DisplayAlert("Error", "Please enter calorie information", "OK");
+                return;
+            }
 
             var formattedText = outputResult.FormattedText;
             var span = formattedText.Spans.FirstOrDefault(s => s.FontAttributes == FontAttributes.Bold);
@@ -94,6 +103,8 @@ namespace MyDiet.Pages
                 await DisplayAlert("Error", "Please enter a valid integer value", "OK");
                 return;
             }
+
+            // Perform similar checks for other input fields if necessary
 
             var selectdate = selectDate.Date.ToString("dd/MM/yyyy");
             await firebaseHelper.AddRecord(selectdate, TotalCalorie);

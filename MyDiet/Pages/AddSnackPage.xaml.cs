@@ -16,25 +16,21 @@ namespace MyDiet.Pages
 
         public class AddFoodViewModel
         {
-            public List<string> FoodOptions { get; set; } = new List<string>
-            {
-                "Apple",
-                "Banana",
-                "Carrot",
-                "Chips",
-                "Cookie"
-            };
 
-            public string SelectedFood { get; set; }
-
-            public int CalorieCount { get; set; }
+            public string Food { get; set; }
+            public string CalorieCount { get; set; }
 
         }
 
         async void SaveRecord(object sender, EventArgs e)
         {
             DateTime currentDate = DateTime.Now;
-            string date = currentDate.ToString("d/M/yyyy");
+
+            if (string.IsNullOrWhiteSpace(Food.Text))
+            {
+                await DisplayAlert("Error", "Please enter a snack", "OK");
+                return;
+            }
 
             if (string.IsNullOrWhiteSpace(CalorieCount.Text))
             {
@@ -48,18 +44,13 @@ namespace MyDiet.Pages
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(FoodPicker.SelectedItem.ToString()))
-            {
-                await DisplayAlert("Error", "Please select a snack", "OK");
-                return;
-            }
-            string food = FoodPicker.SelectedItem.ToString(); 
-            await firebaseHelper.SaveFood(food, calorie, "snack", date);
-            // Update the total calorie count
-            //Record.TotalCalorieCount += calorie;
+            await firebaseHelper.SaveFood(Food.Text, calorie, "Snack", currentDate);
+
             await DisplayAlert("Record Saved", "Record has been saved", "OK");
 
             await Navigation.PopAsync();
         }
+
+
     }
 }

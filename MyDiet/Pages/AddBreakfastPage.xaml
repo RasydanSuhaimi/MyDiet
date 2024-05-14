@@ -1,28 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyDiet.Pages.AddSnackPage"
+             x:Class="MyDiet.Pages.AddBreakfastPage"
              BackgroundColor="#F4F5FC"
-             Title="Add Snack">
+             Title="Add Breakfast">
+    
     <VerticalStackLayout Padding="30,70" Spacing="15">
 
         <Frame CornerRadius="5" BackgroundColor="#FFFFFF" HeightRequest="70" Margin="0,20,0,0" >
             <StackLayout>
-                <Entry x:Name="Food" Placeholder="Snack"
-                 TextColor="#333333" FontSize="16" HeightRequest="40"/>
+                <Entry x:Name="Food" Placeholder="Breakfast"
+             TextColor="#333333" FontSize="16" HeightRequest="40"/>
             </StackLayout>
         </Frame>
 
         <Frame CornerRadius="5" BackgroundColor="#FFFFFF" HeightRequest="70" Margin="0,20,0,0" >
             <StackLayout>
                 <Entry x:Name="CalorieCount" Placeholder="Calorie count" Keyboard="Numeric"
-               TextColor="#333333" FontSize="16" HeightRequest="40"/>
+           TextColor="#333333" FontSize="16" HeightRequest="40"/>
             </StackLayout>
         </Frame>
 
         <StackLayout HorizontalOptions="FillAndExpand">
             <Button x:Name="saveButton" Text="Save" BackgroundColor="#7266DC" VerticalOptions="CenterAndExpand" HeightRequest="60" WidthRequest="110" Clicked="SaveRecord"/>
         </StackLayout>
-        
+
 
     </VerticalStackLayout>
 </ContentPage>

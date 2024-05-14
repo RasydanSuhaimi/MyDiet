@@ -43,8 +43,8 @@
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
-
+		<MauiSplashScreen Include="Resources\Splash\logo.svg" Color="#8B7FF5" Resize="True" />
+		
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
@@ -57,7 +57,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\AppIcon\logo1.svg" />
+	  <None Remove="Resources\Images\about.png" />
+	  <None Remove="Resources\Images\calculator.png" />
 	  <None Remove="Resources\Images\calendaricon.png" />
+	  <None Remove="Resources\Images\home.png" />
+	  <None Remove="Resources\Images\logfood.png" />
+	  <None Remove="Resources\Images\logo.png" />
+	  <None Remove="Resources\Images\record.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -69,6 +76,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Pages\About.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\AddBreakfastPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\AddDinnerPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\AddLunchPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\AddSnackPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

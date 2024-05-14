@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:MyDiet.Pages"
     Shell.FlyoutBehavior="Disabled"
     Title="MyDiet"
-    Shell.BackgroundColor="#342D7E" 
+    Shell.BackgroundColor="#8B7FF5" 
     Shell.TitleColor="White">
 
     <!--<TabBar>
@@ -25,17 +25,21 @@
 
     <FlyoutItem Title="Home" FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent
-        Title="Calculator"
+        Title="Calculator" Icon="calculator.png"
         ContentTemplate="{DataTemplate local:CalorieCalculator}"
         Route="CalorieCalculator" />
         <ShellContent
-        Title="Log Food"
+        Title="Log Food"  Icon="logfood.png"
         ContentTemplate="{DataTemplate local:logFood}"
         Route="Log Food" />
         <ShellContent
-        Title="Record"
+        Title="Record" Icon="record.png"
         ContentTemplate="{DataTemplate local:Record}"
         Route="Record" />
+        <ShellContent
+         Title="About" Icon="about.png"
+         ContentTemplate="{DataTemplate local:About}"
+         Route="About" />  
     </FlyoutItem>
 
 </Shell>

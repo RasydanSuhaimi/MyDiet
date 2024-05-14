@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyDiet.Pages.About"
+             BackgroundColor="#F4F5FC"
+             Title="About">
+    <VerticalStackLayout>
+
+        <StackLayout Padding="40,90,40,50" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+            <!-- Label -->
+            <Label Text="MyDiet" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+            <!-- Image -->
+            <Image Source="logo.png" Aspect="AspectFill" HeightRequest="150" WidthRequest="150"/>
+        </StackLayout>
+
+
+        <StackLayout HorizontalOptions="FillAndExpand" Padding="40,10,40,10">
+            <Label Text="The MyDiet application is designed to track calorie consumption on a daily basis"
+           HorizontalTextAlignment="Center"
+           FontAttributes="Bold"
+           FontSize="17" />
+        </StackLayout>
+
+        <StackLayout HorizontalOptions="FillAndExpand" Padding="40,180,40,10">
+            <Label Text="Version : 1.0 &#10; Devoloper: Muhammad Rasydan Bin Suhaimi"
+           HorizontalTextAlignment="Center" />
+        </StackLayout>
+
+
+    </VerticalStackLayout>
+</ContentPage>

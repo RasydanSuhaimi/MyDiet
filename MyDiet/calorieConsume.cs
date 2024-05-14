@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace MyDiet
 {
-    class SumCalorie
+    internal class calorieConsume
     {
-        //public string Date { get; set; }
-        //public int CalorieIntake { get; set; }
+        public static int CalorieCount { get; internal set; }
     }
 }

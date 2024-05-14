@@ -31,24 +31,74 @@ namespace MyDiet
             return record?.Object;
         }
 
-        public async Task SaveFood(string s, int c, string meal, string dt )
+        public async Task SaveFood(string f, int c, string meal, DateTime dt )
         {
             await firebase
                 .Child("SaveFood")
-                .PostAsync(new SaveFood() { FoodPicker = s, CalorieCount = c, Meal = meal, DateRecorded = dt});
+                .PostAsync(new SaveFood() { Food = f, CalorieCount = c, Meal = meal, DateRecorded = dt});
         }
 
-        public async Task<List<SaveFood>> GetAllFoodRecord()
+        public async Task<List<SaveFood>> GetAllFoodRecord(string foodType = null, DateTime? currentDate = null)
         {
-            return (await firebase
-            .Child("SaveFood")
-            .OnceAsync<SaveFood>()).Select(item => new SaveFood
+            var allRecords = (await firebase
+                .Child("SaveFood")
+                .OnceAsync<SaveFood>())
+                .Select(item => new SaveFood
+                {
+                    Food = item.Object.Food,
+                    CalorieCount = item.Object.CalorieCount,
+                    Meal = item.Object.Meal,
+                    DateRecorded = Convert.ToDateTime(item.Object.DateRecorded), // Convert to DateTime
+                });
+
+            if (!string.IsNullOrEmpty(foodType))
             {
-                FoodPicker = item.Object.FoodPicker,
-                CalorieCount = item.Object.CalorieCount,
-                Meal = item.Object.Meal,
-                DateRecorded = item.Object.DateRecorded,
-            }).ToList();
-        }       
+                // Filter records based on foodType
+                allRecords = allRecords.Where(record => record.Meal.ToLower() == foodType.ToLower());
+            }
+
+            if (currentDate.HasValue)
+            {
+                // Filter records based on currentDate
+                allRecords = allRecords.Where(record => record.DateRecorded.Date == currentDate.Value.Date);
+            }
+
+            return allRecords.ToList();
+        }
+
+
+        //public async Task<int> GetTotalCalorieCount()
+        //{
+        //    var CalorieCount = await firebase
+        //    .Child("SaveFood")
+        //        .OnceAsync<SaveFood>(); // Assuming Food is the class representing items in the "SaveFood" table
+
+        //    int sumCalorieCount = CalorieCount.Sum(CalorieCount => CalorieCount.Object.CalorieCount); // Assuming CalorieCount is the property representing calorie count
+
+        //    return sumCalorieCount;
+        //}
+
+        public async Task<int> GetTotalCalorieCountForCurrentDate()
+        {
+            DateTime currentDate = DateTime.Today;
+
+            var foodItems = await firebase
+                .Child("SaveFood")
+                .OnceAsync<SaveFood>();
+
+            // Filter and sum the calorie count for the current date
+            int sumCalorieCount = foodItems
+                .Where(item => item.Object.DateRecorded.Date == currentDate.Date)
+                .Sum(item => item.Object.CalorieCount);
+
+            return sumCalorieCount;
+        }
+
+        public async Task DeleteFoodRecord()
+        {
+            await firebase
+                .Child("SaveFood")
+                .DeleteAsync();
+        }
     }
 }

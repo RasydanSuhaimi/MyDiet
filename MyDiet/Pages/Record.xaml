@@ -1,36 +1,51 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyDiet.Pages.Record"
+             BackgroundColor="#F4F5FC"
              Title="Record">
+    <ScrollView>
+        <StackLayout>
+            <Frame BorderColor="Gray" CornerRadius="10" Padding="15" Margin="15, 30, 15, 20" >
+                <CollectionView x:Name="displayRecord" ItemsSource="{Binding CalorieCount}">
+                    <CollectionView.Header>
+                        <Grid ColumnDefinitions="1.5* , 1*, 1.2*, 1.5*" BackgroundColor="#766EBB">
+                            <Label Grid.Column="0" Text="Food" FontAttributes="Bold" Padding="5" HorizontalTextAlignment="Start"/>
+                            <Label Grid.Column="1" Text="Calorie" FontAttributes="Bold" Padding="5" HorizontalTextAlignment="Start"/>
+                            <Label Grid.Column="2" Text="Meal" FontAttributes="Bold" Padding="5" HorizontalTextAlignment="Start"/>
+                            <Label Grid.Column="3" Text="Date" FontAttributes="Bold" Padding="5" HorizontalTextAlignment="Start"/>
+                        </Grid>
+                    </CollectionView.Header>
 
-    <StackLayout>
-        <Frame BorderColor="Gray" CornerRadius="10" Padding="15" Margin="30, 30, 30, 20" >
-            <CollectionView x:Name="displayRecord" ItemsSource="{Binding CalorieCount}">
-                <CollectionView.Header>
-                    <Grid ColumnDefinitions="1.5* , 1*, 1*, 1.5*">
-                        <Label Grid.Column="0" Text="Food" FontAttributes="Bold" Padding="5" BackgroundColor="Aquamarine" HorizontalTextAlignment="Center"/>
-                        <Label Grid.Column="1" Text="Calorie" FontAttributes="Bold" Padding="5" BackgroundColor="Aquamarine" HorizontalTextAlignment="Center"/>
-                        <Label Grid.Column="2" Text="Meal" FontAttributes="Bold" Padding="5" BackgroundColor="Aquamarine" HorizontalTextAlignment="Center"/>
-                        <Label Grid.Column="3" Text="Date" FontAttributes="Bold" Padding="5" BackgroundColor="Aquamarine" HorizontalTextAlignment="Center"/>
-                    </Grid>
-                </CollectionView.Header>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <SwipeView>
+                                <Grid ColumnDefinitions="1.5* , 0.9*, 1.1*, 1.5*">
+                                    <Label Grid.Column="0" Text="{Binding Food}" Padding="5" HorizontalTextAlignment="Start"/>
+                                    <Label Grid.Column="1" Text="{Binding CalorieCount}" Padding="5" HorizontalTextAlignment="Start"/>
+                                    <Label Grid.Column="2" Text="{Binding Meal}" Padding="5" HorizontalTextAlignment="Start"/>
+                                    <Label Grid.Column="3" Text="{Binding DateRecorded}" Padding="5" HorizontalTextAlignment="Start"/>
+                                </Grid>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Frame>
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <SwipeView>
-                            <Grid ColumnDefinitions="1.5* , 1*, 1*, 1.5*">
-                                <Label Grid.Column="0" Text="{Binding FoodPicker}" Padding="5" HorizontalTextAlignment="Center"/>
-                                <Label Grid.Column="1" Text="{Binding CalorieCount}" Padding="5" HorizontalTextAlignment="Center"/>
-                                <Label Grid.Column="2" Text="{Binding Meal}" Padding="5" HorizontalTextAlignment="Center"/>
-                                <Label Grid.Column="3" Text="{Binding DateRecorded}" Padding="5" HorizontalTextAlignment="Center"/>
-                            </Grid>
-                        </SwipeView>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </Frame>
+            <StackLayout HorizontalOptions="FillAndExpand">
+                <Button Text="Delete" BackgroundColor="#ED5252" VerticalOptions="CenterAndExpand" HeightRequest="60" WidthRequest="110" Clicked="DeleteFoodRecordAsync"/>
+            </StackLayout>
 
-        <!-- Total Calorie Count Label --><!--
+            <Frame BorderColor="Gray" CornerRadius="10" Padding="15" Margin="15, 30, 15, 20" >
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Calorie today = " VerticalOptions="Center" FontAttributes="Bold" FontSize="15" />
+                    <Label Grid.Column="2" Grid.Row="0" x:Name="calorieConsume" VerticalOptions="Center" FontAttributes="Bold" FontSize="15" />
+                    <Label Text=" cal " VerticalOptions="Center" FontAttributes="Bold" FontSize="15" />
+                </StackLayout>
+            </Frame>
+
+            <!-- Total Calorie Count Label -->
+            <!--
         <Label Text="{Binding TotalCalorieCount, StringFormat='Total Calorie Count: {0}'}" HorizontalOptions="Center" Margin="0,20,0,0" />-->
-    </StackLayout>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
